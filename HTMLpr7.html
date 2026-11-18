@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artsphere | Art Gallery</title>
+
+<style>
+
+/* GENERAL */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f0fa;
+    color: #514263;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* HEADER */
+header {
+    background: white;
+    text-align: center;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 12px rgba(91, 33, 182, 0.1);
+}
+
+header h1 {
+    color: #7e22ce;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+header p {
+    color: #8b5ab5;
+}
+
+nav a {
+    color: #5b21b6;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #a855f7;
+    text-decoration: underline;
+}
+
+/* DROPDOWN */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown button {
+    background: none;
+    color: #5b21b6;
+    border: none;
+    padding: 0;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background: white;
+    box-shadow: 0 3px 8px rgba(91, 33, 182, 0.15);
+    border-radius: 6px;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 8px 12px;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+/* AUDIO */
+.music {
+    background: #ede2f7;
+    text-align: center;
+    padding: 10px;
+}
+
+/* HERO BANNER */
+.hero {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+    background: #4c1d70;
+}
+
+.banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(45, 15, 65, 0.75),
+        transparent 90%
+    );
+}
+
+.hero-content {
+    position: absolute;
+    left: 7%;
+    bottom: 35px;
+    z-index: 2;
+    color: white;
+    text-shadow: 0 2px 5px #321044;
+}
+
+.hero-content h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.live-tag {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    z-index: 3;
+    background: #9333ea;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* PAGE LAYOUT */
+.page-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 94%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 210px;
+    flex-shrink: 0;
+    background: white;
+    border-left: 5px solid #9333ea;
+    border-radius: 8px;
+    padding: 15px;
+    position: sticky;
+    top: 125px;
+}
+
+.sidebar h2 {
+    color: #7e22ce;
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: #514263;
+    padding: 7px 0;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    color: #9333ea;
+}
+
+.main-content {
+    min-width: 0;
+    flex: 1;
+}
+
+/* SECTION HEADINGS */
+.media {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.section-heading {
+    border-left: 5px solid #9333ea;
+    padding-left: 12px;
+    margin-bottom: 15px;
+    color: #5b21b6;
+}
+
+/* MEDIA BOXES */
+.box {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 1% 18px 0;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 3px 10px rgba(91, 33, 182, 0.08);
+}
+
+.box h3 {
+    margin: 0 0 10px;
+    color: #6b21a8;
+}
+
+.box iframe,
+.box video {
+    width: 100%;
+    height: 250px;
+    border: 0;
+    display: block;
+    border-radius: 4px;
+}
+
+.media-tag {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    background: #9333ea;
+    color: white;
+    font-size: 11px;
+    padding: 4px 7px;
+    border-radius: 3px;
+}
+
+/* FEATURE STRIP */
+.feature-strip {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 22px 0;
+}
+
+.feature {
+    flex: 1 1 150px;
+    background: white;
+    padding: 15px;
+    border-radius: 7px;
+    border-bottom: 3px solid #c084fc;
+}
+
+.feature strong {
+    display: block;
+    font-size: 22px;
+    color: #7e22ce;
+}
+
+/* ART INFORMATION CARDS */
+.art-card {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    border-radius: 8px;
+    padding: 18px;
+    margin: 18px 0;
+    border-left: 5px solid #9333ea;
+    box-shadow: 0 3px 10px rgba(91, 33, 182, 0.08);
+}
+
+.art-card h3 {
+    margin-top: 0;
+    padding-right: 90px;
+    color: #6b21a8;
+}
+
+.art-card p {
+    margin-bottom: 0;
+}
+
+.card-status {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #f3e8ff;
+    color: #7e22ce;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px 8px;
+    border-radius: 4px;
+}
+
+/* EXHIBITION SCHEDULE */
+.schedule {
+    position: relative;
+    margin: 20px 0;
+    padding: 5px 0 5px 28px;
+    border-left: 3px solid #9333ea;
+}
+
+.schedule-item {
+    position: relative;
+    background: white;
+    margin: 0 0 14px;
+    padding: 12px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 7px rgba(91, 33, 182, 0.06);
+}
+
+.schedule-item::before {
+    content: "";
+    position: absolute;
+    left: -37px;
+    top: 17px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #9333ea;
+    border: 3px solid #f5f0fa;
+}
+
+.schedule-item strong {
+    color: #7e22ce;
+}
+
+/* ARTIST SUBMISSION FORM */
+.form-section {
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    background: white;
+    padding: 18px;
+    border-radius: 8px;
+}
+
+.form-section h2 {
+    color: #7e22ce;
+}
+
+.form-section input,
+.form-section select,
+.form-section textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #d8b4fe;
+    border-radius: 4px;
+}
+
+button {
+    background: #7e22ce;
+    color: white;
+    border: 0;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #5b21b6;
+}
+
+/* GALLERY */
+.gallery-section {
+    width: 100%;
+    margin: 28px auto;
+}
+
+.gallery-intro {
+    color: #786987;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.gallery-card {
+    overflow: hidden;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(91, 33, 182, 0.08);
+}
+
+.gallery-open {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: #4c1d70;
+    overflow: hidden;
+}
+
+.gallery-open img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.25s;
+}
+
+.gallery-open:hover img {
+    transform: scale(1.04);
+}
+
+.gallery-caption {
+    padding: 12px 14px;
+    margin: 0;
+    font-weight: bold;
+    color: #6b21a8;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(30, 10, 45, 0.94);
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: 75vh;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 22px;
+    font-size: 28px;
+}
+
+/* FOOTER */
+footer {
+    background: #4c1d70;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 800px) {
+
+    .page-layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+        position: static;
+    }
+
+    .sidebar a {
+        display: inline-block;
+        margin-right: 12px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .box {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .hero {
+        height: 260px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px 8px;
+    }
+
+    .hero-content {
+        left: 5%;
+        right: 5%;
+        bottom: 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <h1>ARTSPHERE</h1>
+
+    <p>WHERE CREATIVITY MEETS IMAGINATION</p>
+
+    <nav>
+
+        <a href="#media">Media</a>
+
+        <a href="#gallery">Gallery</a>
+
+        <div class="dropdown">
+
+            <button type="button">Explore Art ▼</button>
+
+            <div class="dropdown-content">
+
+                <a href="#art-info">Paintings</a>
+
+                <a href="#gallery">Digital Art</a>
+
+                <a href="#schedule">Exhibitions</a>
+
+                <a href="#application">Submit Artwork</a>
+
+            </div>
+
+        </div>
+
+        <a href="#schedule">Events</a>
+
+        <a href="#application">Contact</a>
+
+    </nav>
+
+</header>
+
+<!-- AUDIO -->
+
+<div class="music">
+
+    <p>Enjoy Some Music While Exploring Art:</p>
+
+    <audio controls>
+
+        <source src="audio.mpeg" type="audio/mpeg">
+
+        Your browser does not support audio.
+
+    </audio>
+
+</div>
+
+<!-- HERO BANNER -->
+
+<section class="hero">
+
+    <img class="banner"
+         src="art.jpeg"
+         alt="Beautiful artwork displayed in an art gallery">
+
+    <span class="live-tag">ART & CREATIVITY</span>
+
+    <div class="hero-content">
+
+        <h2>EXPLORE.<br>IMAGINE. CREATE.</h2>
+
+        <p>
+            Discover the beauty of art and creative expression.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- MAIN PAGE LAYOUT -->
+
+<div class="page-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2>Artsphere Hub</h2>
+
+        <p>Welcome to Artsphere, a space dedicated to creativity and imagination!</p>
+
+        <a href="#media">Media Elements</a>
+
+        <a href="#gallery">Art Gallery</a>
+
+        <a href="#art-info">About Art</a>
+
+        <a href="#schedule">Exhibitions</a>
+
+        <a href="#application">Submit Artwork</a>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- MEDIA SECTION -->
+
+        <section class="media" id="media">
+
+            <h2 class="section-heading">Explore the World of Art</h2>
+
+            <!-- FEATURE STRIP -->
+
+            <div class="feature-strip">
+
+                <div class="feature">
+
+                    <strong>01</strong>
+
+                    <span>Traditional Paintings</span>
+
+                </div>
+
+                <div class="feature">
+
+                    <strong>02</strong>
+
+                    <span>Digital Artwork</span>
+
+                </div>
+
+                <div class="feature">
+
+                    <strong>03</strong>
+
+                    <span>Creative Sculptures</span>
+
+                </div>
+
+            </div>
+
+            <!-- PDF -->
+
+            <div class="box">
+
+                <span class="media-tag">GUIDE</span>
+
+                <h3>Art Collection</h3>
+
+                <iframe
+                    src="art1.pdf"
+                    title="Art Collection PDF">
+                </iframe>
+
+            </div>
+
+            <!-- YOUTUBE -->
+
+            <div class="box">
+
+                <span class="media-tag">VIDEO</span>
+
+                <h3>Art and Creativity</h3>
+
+                <iframe
+                    src="https://www.youtube.com/embed/VIDEO_ID"
+                    title="Art and Creativity Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+            <!-- LOCAL VIDEO -->
+
+            <div class="box">
+
+                <span class="media-tag">ART FILM</span>
+
+                <h3>Art Exhibition Video</h3>
+
+                <video controls>
+
+                    <source src="video.mp4" type="video/mp4">
+
+                    Your browser does not support video.
+
+                </video>
+
+            </div>
+
+            <!-- GOOGLE MAPS -->
+
+            <div class="box">
+
+                <span class="media-tag">LOCATION</span>
+
+                <h3>Art Gallery Location</h3>
+
+                <iframe
+                    src="https://www.google.com/maps?q=art+gallery&output=embed"
+                    title="Art Gallery Location"
+                    loading="lazy">
+                </iframe>
+
+            </div>
+
+        </section>
+
+        <!-- GALLERY -->
+
+        <section class="gallery-section" id="gallery">
+
+            <h2 class="section-heading">Artsphere Art Gallery</h2>
+
+            <p class="gallery-intro">
+
+                Explore a collection of beautiful paintings, digital artwork
+                and creative masterpieces. Click any image to view it larger.
+
+            </p>
+
+            <div class="gallery-grid">
+
+                <!-- IMAGE 1 -->
+
+                <article class="gallery-card">
+
+                    <button class="gallery-open" type="button"
+                    data-full="art.jpeg"
+                    data-caption="Featured Artwork">
+
+                        <img src="art.jpeg"
+                        alt="Featured artwork"
+                        loading="lazy">
+
+                    </button>
+
+                    <p class="gallery-caption">
+                        Featured Artwork
+                    </p>
+
+                </article>
+
+                <!-- IMAGE 2 -->
+
+                <article class="gallery-card">
+
+                    <button class="gallery-open" type="button"
+                    data-full="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1200"
+                    data-caption="Classic Painting">
+
+                        <img
+                        src="img2.png"
+                        alt="Classic painting"
+                        loading="lazy">
+
+                    </button>
+
+                    <p class="gallery-caption">
+                        Classic Painting
+                    </p>
+
+                </article>
+
+                <!-- IMAGE 3 -->
+
+                <article class="gallery-card">
+
+                    <button class="gallery-open" type="button"
+                    data-full="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=1200"
+                    data-caption="Modern Art">
+
+                        <img
+                        src="img3.png"
+                        alt="Modern abstract artwork"
+                        loading="lazy">
+
+                    </button>
+
+                    <p class="gallery-caption">
+                        Modern Art
+                    </p>
+
+                </article>
+
+                <!-- IMAGE 4 -->
+
+                <article class="gallery-card">
+
+                    <button class="gallery-open" type="button"
+                    data-full="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=1200"
+                    data-caption="Abstract Art">
+
+                        <img
+                        src="img4.png"
+                        alt="Abstract art"
+                        loading="lazy">
+
+                    </button>
+
+                    <p class="gallery-caption">
+                        Abstract Art
+                    </p>
+
+                </article>
+
+                <!-- IMAGE 5 -->
+
+                <article class="gallery-card">
+
+                    <button class="gallery-open" type="button"
+                    data-full="img5.png"
+                    data-caption="Creative Masterpiece">
+
+                        <img
+                        src="img5.png"
+                        alt="Creative masterpiece"
+                        loading="lazy">
+
+                    </button>
+
+                    <p class="gallery-caption">
+                        Creative Masterpiece
+                    </p>
+
+                </article>
+
+                <!-- IMAGE 6 -->
+
+                <article class="gallery-card">
+
+                    <button class="gallery-open" type="button"
+                    data-full="img1.png"
+                    data-caption="Artistic Expression">
+
+                        <img
+                        src="img6.png"
+                        alt="Artistic expression"
+                        loading="lazy">
+
+                    </button>
+
+                    <p class="gallery-caption">
+                        Artistic Expression
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- LIGHTBOX -->
+
+        <div class="lightbox" id="lightbox"
+        role="dialog" aria-modal="true"
+        aria-label="Expanded gallery image"
+        aria-hidden="true">
+
+            <button class="lightbox-close"
+            id="lightbox-close"
+            type="button"
+            aria-label="Close image viewer">
+
+                &times;
+
+            </button>
+
+            <div class="lightbox-content">
+
+                <img class="lightbox-image"
+                id="lightbox-image"
+                src=""
+                alt="">
+
+                <p class="lightbox-caption"
+                id="lightbox-caption"></p>
+
+            </div>
+
+        </div>
+
+        <!-- ABOUT ART -->
+
+        <section id="art-info">
+
+            <h2 class="section-heading">
+                Discover the Beauty of Art
+            </h2>
+
+            <article class="art-card">
+
+                <span class="card-status">PAINTINGS</span>
+
+                <h3>Traditional Art</h3>
+
+                <p>
+                    Traditional art represents creativity through
+                    paintings, drawings and handcrafted techniques.
+                    It allows artists to express emotions and ideas
+                    through colours and textures.
+                </p>
+
+            </article>
+
+            <article class="art-card">
+
+                <span class="card-status">DIGITAL</span>
+
+                <h3>Digital Art</h3>
+
+                <p>
+                    Digital art uses modern technology and creative
+                    software to produce illustrations, designs and
+                    visually engaging masterpieces.
+                </p>
+
+            </article>
+
+            <article class="art-card">
+
+                <span class="card-status">SCULPTURES</span>
+
+                <h3>Creative Sculptures</h3>
+
+                <p>
+                    Sculptures transform materials into three-dimensional
+                    artworks, showcasing imagination, creativity and
+                    artistic craftsmanship.
+                </p>
+
+            </article>
+
+            <!-- EXHIBITION SCHEDULE -->
+
+            <h2 class="section-heading" id="schedule">
+
+                Upcoming Art Exhibitions
+
+            </h2>
+
+            <div class="schedule">
+
+                <div class="schedule-item">
+
+                    <strong>10:00 AM — Painting Exhibition</strong>
+
+                    <p>Explore beautiful traditional and modern paintings.</p>
+
+                </div>
+
+                <div class="schedule-item">
+
+                    <strong>11:30 AM — Digital Art Showcase</strong>
+
+                    <p>Discover creative digital illustrations and designs.</p>
+
+                </div>
+
+                <div class="schedule-item">
+
+                    <strong>01:00 PM — Sculpture Exhibition</strong>
+
+                    <p>Experience creative three-dimensional artworks.</p>
+
+                </div>
+
+                <div class="schedule-item">
+
+                    <strong>02:30 PM — Artist Interaction</strong>
+
+                    <p>Meet artists and learn about their creative journeys.</p>
+
+                </div>
+
+                <div class="schedule-item">
+
+                    <strong>04:00 PM — Closing Showcase</strong>
+
+                    <p>Explore the featured masterpieces of the exhibition.</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ARTIST SUBMISSION FORM -->
+
+        <section class="form-section" id="application">
+
+            <h2>Submit Your Artwork</h2>
+
+            <form action="#" method="post">
+
+                <label for="full-name">Artist Name</label>
+
+                <input
+                id="full-name"
+                name="full-name"
+                type="text"
+                placeholder="Enter your name"
+                required>
+
+                <label for="email">Email</label>
+
+                <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                required>
+
+                <label for="category">Artwork Category</label>
+
+                <select id="category" name="category">
+
+                    <option>Painting</option>
+
+                    <option>Digital Art</option>
+
+                    <option>Sculpture</option>
+
+                    <option>Photography</option>
+
+                    <option>Other</option>
+
+                </select>
+
+                <label for="description">
+                    Describe Your Artwork
+                </label>
+
+                <textarea
+                id="description"
+                name="description"
+                rows="4"
+                placeholder="Tell us about your artwork">
+                </textarea>
+
+                <button type="submit">Submit Artwork</button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>&copy; 2026 Artsphere | All Rights Reserved</p>
+
+    <p>Where Creativity Meets Imagination!</p>
+
+</footer>
+
+<!-- JAVASCRIPT: IMAGE LIGHTBOX -->
+
+<script>
+
+const galleryButtons =
+document.querySelectorAll(".gallery-open");
+
+const lightbox =
+document.getElementById("lightbox");
+
+const lightboxImage =
+document.getElementById("lightbox-image");
+
+const lightboxCaption =
+document.getElementById("lightbox-caption");
+
+const closeLightbox =
+document.getElementById("lightbox-close");
+
+let previousFocus = null;
+
+function openLightbox(button) {
+
+    previousFocus = button;
+
+    lightboxImage.src = button.dataset.full;
+
+    lightboxImage.alt =
+    button.querySelector("img").alt;
+
+    lightboxCaption.textContent =
+    button.dataset.caption;
+
+    lightbox.classList.add("open");
+
+    lightbox.setAttribute("aria-hidden", "false");
+
+    closeLightbox.focus();
+
+}
+
+function hideLightbox() {
+
+    lightbox.classList.remove("open");
+
+    lightbox.setAttribute("aria-hidden", "true");
+
+    lightboxImage.src = "";
+
+    if (previousFocus) {
+        previousFocus.focus();
+    }
+
+}
+
+galleryButtons.forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        openLightbox(button);
+
+    });
+
+});
+
+closeLightbox.addEventListener("click", hideLightbox);
+
+lightbox.addEventListener("click", function(event) {
+
+    if (event.target === lightbox) {
+
+        hideLightbox();
+
+    }
+
+});
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape" &&
+        lightbox.classList.contains("open")) {
+
+        hideLightbox();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
